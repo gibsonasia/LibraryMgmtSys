@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_name_et"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.studios.truhbel.mylib.CreateAccActivity">
+
+    <EditText
+        android:id="@+id/username_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_name_et"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="UserName"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/user_id_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/username_et"
+        android:layout_below="@+id/username_et"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="ID Number"
+        android:inputType="numberPassword" />
+
+    <Button
+        android:id="@+id/fire_base_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_id_et"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:gravity="center"
+        android:text="Create Account" />
+
+
+    <EditText
+        android:id="@+id/last_name_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/username_et"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="First Name, Last Name"
+        android:inputType="textPersonName" />
+
+
+</RelativeLayout>
