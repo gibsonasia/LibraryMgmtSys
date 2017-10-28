@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "8985536345",
+    "firebase_url": "https://mylib-9a77b.firebaseio.com",
+    "project_id": "mylib-9a77b",
+    "storage_bucket": "mylib-9a77b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8985536345:android:fb69ded126abd07e",
+        "android_client_info": {
+          "package_name": "com.studios.truhbel.mylib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8985536345-gui3jrjmrqhoajeh85b148c8kbau290t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.studios.truhbel.mylib",
+            "certificate_hash": "d7a92e8dbb4d225f4096c8c029ee9473605bca3d"
+          }
+        },
+        {
+          "client_id": "8985536345-b2lp1ojnkfb8s2f5p48pc5nej6kl6t35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF2Ki25zsXrpso0Xus_dmJmHNKvKtY4PY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8985536345-b2lp1ojnkfb8s2f5p48pc5nej6kl6t35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
