@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#49c5d8"
+    tools:context="com.studios.truhbel.mylib.activities.LoginActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/email_log_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/pw_log_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pw_log_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/cacc_et"
+        app:layout_constraintStart_toStartOf="@+id/email_log_et"
+        app:layout_constraintTop_toBottomOf="@+id/email_log_et" />
+
+    <TextView
+        android:id="@+id/cacc_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:text="Create Account"
+        app:layout_constraintBottom_toTopOf="@+id/signin_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pw_log_et" />
+
+    <TextView
+        android:id="@+id/forgot_log_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="42dp"
+        android:clickable="true"
+        android:text="Forgotten your Password? Assistance here."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_btn" />
+
+    <Button
+        android:id="@+id/signin_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="167dp"
+        android:layout_marginStart="4dp"
+        android:text="Sign In"
+        app:layout_constraintBottom_toTopOf="@+id/forgot_log_tv"
+        app:layout_constraintStart_toStartOf="@+id/cacc_et"
+        app:layout_constraintTop_toBottomOf="@+id/cacc_et" />
+</android.support.constraint.ConstraintLayout>
