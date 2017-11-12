@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, BaseActivity.class));
+            startActivity(new Intent(LoginActivity.this, UserLandingActivity.class));
             finish();
         }
 
@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 startActivity(intent);
-                //startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
 
@@ -76,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                //progressBar.setVisibility(View.VISIBLE);
 
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password)
@@ -95,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, UserLandingActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }

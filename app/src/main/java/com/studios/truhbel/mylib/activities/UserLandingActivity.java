@@ -6,8 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +20,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.studios.truhbel.mylib.R;
 
-public class BaseActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class UserLandingActivity extends AppCompatActivity {
+
+    ListView listView;
+    ArrayAdapter<String> adapter;
+    ArrayList<String>arrayList;
+
     TextView userEmail;
-    EditText newPasswordField;
-    Button signout,deleaccount, confirmNewPw,changePw;
+    EditText addBook;
+    ImageView addbtn;
+    Button signout, deleaccount;
+    //  EditText newPasswordField;
+    //, confirmNewPw,changePw;
 
     FirebaseAuth.AuthStateListener authStateListener;
     FirebaseAuth auth;
@@ -31,17 +45,25 @@ public class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         auth = FirebaseAuth.getInstance();
 
+        listView = findViewById(R.id.listview);
+        String[] myBooks = {"full moon", "date night"};
+        arrayList = new ArrayList<>(Arrays.asList(myBooks));
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        listView.setAdapter(adapter);
+
         userEmail = findViewById(R.id.users_email_tv);
-        newPasswordField = findViewById(R.id.newpw_et);
         signout = findViewById(R.id.signout_btn);
         deleaccount = findViewById(R.id.deleacc_btn);
-        confirmNewPw = findViewById(R.id.confirm_btn);
-        changePw = findViewById(R.id.pw_change_btn);
+        addbtn = findViewById(R.id.add_btn);
+        addBook = findViewById(R.id.book_et);
+
 
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(user);
+
+
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,84 +72,87 @@ public class BaseActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+                    startActivity(new Intent(UserLandingActivity.this, LoginActivity.class));
                     finish();
                 }
             }
         };
 
-      //  userEmail.setVisibility(View.GONE);
-
-      //  password.setVisibility(View.GONE);
-        newPasswordField.setVisibility(View.GONE);
-
-        confirmNewPw.setVisibility(View.GONE);
-
-        //remove.setVisibility(View.GONE);
-
-
-         changePw.setOnClickListener(new View.OnClickListener() {
+        addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                newPasswordField.setVisibility(View.VISIBLE);
-
-                confirmNewPw.setVisibility(View.VISIBLE);
-
-                deleaccount.setVisibility(View.GONE);
+            public void onClick(View view) {
+                String newEntry = addBook.getText().toString();
+                arrayList.add(newEntry);
+                adapter.notifyDataSetChanged();
             }
         });
 
-        confirmNewPw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //  progressBar.setVisibility(View.VISIBLE);
-                if (user != null && !newPasswordField.getText().toString().trim().equals("")) {
-                    if (newPasswordField.getText().toString().trim().length() < 6) {
-                        newPasswordField.setError("Password too short, enter minimum 6 characters");
-                        //progressBar.setVisibility(View.GONE);
-                    } else {
-                        user.updatePassword(newPasswordField.getText().toString().trim())
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(BaseActivity.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
-                                            signOut();
-                                            //progressBar.setVisibility(View.GONE);
-                                        } else {
-                                            Toast.makeText(BaseActivity.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
-                                           // progressBar.setVisibility(View.GONE);
-                                        }
-                                    }
-                                });
-                    }
-                } else if (newPasswordField.getText().toString().trim().equals("")) {
-                    newPasswordField.setError("Enter password");
-                }
-            }
-        });
+
+//         changePw.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                newPasswordField.setVisibility(View.VISIBLE);
+//
+//                confirmNewPw.setVisibility(View.VISIBLE);
+//
+//                deleaccount.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        confirmNewPw.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//              //  progressBar.setVisibility(View.VISIBLE);
+//                if (user != null && !newPasswordField.getText().toString().trim().equals("")) {
+//                    if (newPasswordField.getText().toString().trim().length() < 6) {
+//                        newPasswordField.setError("Password too short, enter minimum 6 characters");
+//                        //progressBar.setVisibility(View.GONE);
+//                    } else {
+//                        user.updatePassword(newPasswordField.getText().toString().trim())
+//                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                        if (task.isSuccessful()) {
+//                                            Toast.makeText(UserLandingActivity.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
+//                                            signOut();
+//                                            //progressBar.setVisibility(View.GONE);
+//                                        } else {
+//                                            Toast.makeText(UserLandingActivity.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
+//                                           // progressBar.setVisibility(View.GONE);
+//                                        }
+//                                    }
+//                                });
+//                    }
+//                } else if (newPasswordField.getText().toString().trim().equals("")) {
+//                    newPasswordField.setError("Enter password");
+//                }
+//            }
+//        });
 
         deleaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (user != null) {
                     user.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(BaseActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(BaseActivity.this, RegisterActivity.class));
+                                        Toast.makeText(UserLandingActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(UserLandingActivity.this, RegisterActivity.class));
                                         finish();
                                     } else {
-                                        Toast.makeText(BaseActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UserLandingActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 }
+
             }
         });
+
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +170,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     }
+
     // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
@@ -154,7 +180,7 @@ public class BaseActivity extends AppCompatActivity {
             if (user == null) {
                 // user auth state is changed - user is null
                 // launch login activity
-                startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+                startActivity(new Intent(UserLandingActivity.this, LoginActivity.class));
                 finish();
             } else {
                 setDataToView(user);
@@ -178,7 +204,7 @@ public class BaseActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+                    startActivity(new Intent(UserLandingActivity.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -203,4 +229,5 @@ public class BaseActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
 }

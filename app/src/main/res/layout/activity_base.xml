@@ -1,78 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.studios.truhbel.mylib.activities.BaseActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context="com.studios.truhbel.mylib.activities.UserLandingActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="#42f4c8"
+        >
+
+        <TextView
+            android:id="@+id/users_email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="42dp"
+            android:layout_marginLeft="155dp"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
 
 
-    <TextView
-        android:id="@+id/users_email_tv"
-        android:layout_width="206dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="41dp"
-        android:layout_marginTop="96dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/newpw_et"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/book_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:hint="Book title"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/pw_change_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Change Password"
-        app:layout_constraintBottom_toTopOf="@+id/deleacc_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_btn" />
 
-    <Button
-        android:id="@+id/deleacc_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete account"
-        app:layout_constraintBottom_toTopOf="@+id/signout_btn"
-        app:layout_constraintStart_toStartOf="@+id/signout_btn"
-        app:layout_constraintTop_toBottomOf="@+id/pw_change_btn" />
 
-    <Button
-        android:id="@+id/signout_btn"
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
-        android:text="Sign out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleacc_btn" />
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:divider="#020202"
+            android:dividerHeight="1dp">
 
-    <EditText
-        android:id="@+id/newpw_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="new passwrod"
-        android:inputType="textPassword"
-        android:singleLine="false"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/users_email_tv" />
 
-    <Button
-        android:id="@+id/confirm_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:layout_marginStart="25dp"
-        android:text="Confirm change"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/pw_change_btn"
-        app:layout_constraintStart_toStartOf="@+id/newpw_et"
-        app:layout_constraintTop_toBottomOf="@+id/newpw_et" />
-</android.support.constraint.ConstraintLayout>
+        </ListView>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+       >
+
+        <Button
+            android:id="@+id/deleacc_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="46dp"
+            android:text="delete account" />
+
+        <ImageView
+            android:id="@+id/add_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/addbtn" />
+
+        <Button
+            android:id="@+id/signout_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="Sign out" />
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
