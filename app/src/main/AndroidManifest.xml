@@ -21,6 +21,7 @@
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.UserLandingActivity" />
+        <activity android:name=".linktodataebase.FireBaseActivity"/>
     </application>
 
 </manifest>

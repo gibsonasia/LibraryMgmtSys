@@ -1,7 +1,9 @@
 package com.studios.truhbel.mylib.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +20,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.studios.truhbel.mylib.R;
+import com.studios.truhbel.mylib.linktodataebase.FireBaseActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,28 +32,33 @@ public class UserLandingActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayAdapter<String> adapter;
-    ArrayList<String>arrayList;
+    ArrayList<String> arrayList;
 
     TextView userEmail;
     EditText addBook;
-    ImageView addbtn;
+    ImageView addbtn,dbBkbtn;
     Button signout, deleaccount;
-    //  EditText newPasswordField;
-    //, confirmNewPw,changePw;
+    SharedPreferences sharedPreferences;
+
 
     FirebaseAuth.AuthStateListener authStateListener;
     FirebaseAuth auth;
+    DatabaseReference mDataBase;
+
+    @SuppressLint("WrongViewCast")
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         auth = FirebaseAuth.getInstance();
+        mDataBase = FirebaseDatabase.getInstance().getReference();
+
 
         listView = findViewById(R.id.listview);
         String[] myBooks = {"full moon", "date night"};
         arrayList = new ArrayList<>(Arrays.asList(myBooks));
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);
 
         userEmail = findViewById(R.id.users_email_tv);
@@ -56,13 +66,13 @@ public class UserLandingActivity extends AppCompatActivity {
         deleaccount = findViewById(R.id.deleacc_btn);
         addbtn = findViewById(R.id.add_btn);
         addBook = findViewById(R.id.book_et);
+        dbBkbtn = findViewById(R.id.iv_bk);
 
-
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(user);
-
 
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -84,51 +94,24 @@ public class UserLandingActivity extends AppCompatActivity {
                 String newEntry = addBook.getText().toString();
                 arrayList.add(newEntry);
                 adapter.notifyDataSetChanged();
+
+                sharedPreferences = getSharedPreferences("PREFS",0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("arrayList",newEntry);
+                //editor.putInt("book_title", 0);
+                editor.commit();
+
             }
         });
 
+        dbBkbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserLandingActivity.this, FireBaseActivity.class);
+                startActivity(intent);
+            }
+        });
 
-//         changePw.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                newPasswordField.setVisibility(View.VISIBLE);
-//
-//                confirmNewPw.setVisibility(View.VISIBLE);
-//
-//                deleaccount.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        confirmNewPw.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//              //  progressBar.setVisibility(View.VISIBLE);
-//                if (user != null && !newPasswordField.getText().toString().trim().equals("")) {
-//                    if (newPasswordField.getText().toString().trim().length() < 6) {
-//                        newPasswordField.setError("Password too short, enter minimum 6 characters");
-//                        //progressBar.setVisibility(View.GONE);
-//                    } else {
-//                        user.updatePassword(newPasswordField.getText().toString().trim())
-//                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//                                        if (task.isSuccessful()) {
-//                                            Toast.makeText(UserLandingActivity.this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show();
-//                                            signOut();
-//                                            //progressBar.setVisibility(View.GONE);
-//                                        } else {
-//                                            Toast.makeText(UserLandingActivity.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
-//                                           // progressBar.setVisibility(View.GONE);
-//                                        }
-//                                    }
-//                                });
-//                    }
-//                } else if (newPasswordField.getText().toString().trim().equals("")) {
-//                    newPasswordField.setError("Enter password");
-//                }
-//            }
-//        });
 
         deleaccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +149,7 @@ public class UserLandingActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
 
-        userEmail.setText("User Email: " + user.getEmail());
+        userEmail.setText("User: " + user.getEmail());
 
 
     }

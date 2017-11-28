@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         forgotpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"you've clicked this view",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(LoginActivity.this,ResetPasswordActivity.class));
             }
         });
 
@@ -81,10 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                               // progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     // there was an error
                                     if (password.length() < 6) {

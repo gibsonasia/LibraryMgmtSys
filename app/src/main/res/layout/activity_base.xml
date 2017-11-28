@@ -20,9 +20,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="42dp"
-            android:layout_marginLeft="155dp"
             android:text="TextView" />
+
+        <ImageView
+            android:id="@+id/iv_bk"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="120dp"
+            android:clickable="true"
+            android:src="@drawable/ic_book_lib" />
     </LinearLayout>
 
     <LinearLayout
